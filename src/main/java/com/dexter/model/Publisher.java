@@ -6,6 +6,10 @@ public class Publisher {
     private String emailId;
     private String password;
 
+    public Publisher(){
+
+    }
+
     public Publisher(String publisherName, String emailId, String password) {
         this.publisherName = publisherName;
         this.emailId = emailId;
@@ -42,5 +46,15 @@ public class Publisher {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Publisher{" +
+                "publisherId=" + publisherId +
+                ", publisherName='" + publisherName + '\'' +
+                ", emailId='" + emailId + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

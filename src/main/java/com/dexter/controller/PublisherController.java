@@ -1,7 +1,9 @@
 package com.dexter.controller;
 
+import com.dexter.model.Publisher;
 import com.dexter.service.PublisherService;
-import com.dexter.service.UserService;
+
+import java.util.Optional;
 
 public class PublisherController {
     public static boolean addPublisher(String pName , String emailId , String password){
@@ -13,5 +15,13 @@ public class PublisherController {
 
     public static boolean loginPublisher(String emailId, String password) {
         return PublisherService.checkPublisherCredentials(emailId , password);
+    }
+
+    public static Optional<Publisher> getPublisherByEmailId(String emailId) {
+        return PublisherService.getPublisherByEmailIdFromDb(emailId);
+    }
+
+    public static boolean addSongToDb(String sName, int publisherId, String genre, String language) {
+        return PublisherService.addSongToDB(sName , publisherId , genre , language);
     }
 }

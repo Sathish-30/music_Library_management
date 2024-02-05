@@ -3,7 +3,6 @@ package com.dexter.views;
 
 import com.dexter.controller.PublisherController;
 import com.dexter.controller.UserController;
-
 import java.util.Scanner;
 
 public class Main {
@@ -36,6 +35,7 @@ public class Main {
                     System.out.print("---------------------------------------------------------------------------- \n");
                     System.out.println("User signed up successfully");
                     System.out.println("---------------------------------------------------------------------------- \n");
+                    UserView.userView(emailId);
                 }else{
                     System.out.print("---------------------------------------------------------------------------- \n");
                     System.out.println("User Already exists");
@@ -56,6 +56,7 @@ public class Main {
                     System.out.print("---------------------------------------------------------------------------- \n");
                     System.out.println("User Logged in successfully");
                     System.out.println("---------------------------------------------------------------------------- \n");
+                    UserView.userView(emailId);
                 }else{
                     System.out.print("---------------------------------------------------------------------------- \n");
                     System.out.println("Invalid credentials");
@@ -81,6 +82,7 @@ public class Main {
                     System.out.print("---------------------------------------------------------------------------- \n");
                     System.out.println("publisher signed up successfully");
                     System.out.println("---------------------------------------------------------------------------- \n");
+                    PublisherView.publisherView(emailId);
                 }else{
                     System.out.print("---------------------------------------------------------------------------- \n");
                     System.out.println("Publisher Already exists");
@@ -101,6 +103,7 @@ public class Main {
                     System.out.print("---------------------------------------------------------------------------- \n");
                     System.out.println("Publisher Logged in successfully");
                     System.out.println("---------------------------------------------------------------------------- \n");
+                    PublisherView.publisherView(emailId);
                 }else{
                     System.out.print("---------------------------------------------------------------------------- \n");
                     System.out.println("Invalid credentials");

@@ -4,11 +4,9 @@ public class AuthenticationQueries {
     public static String userSignUp(){
         return "INSERT INTO users(userName , emailId , password) VALUES (? , ? , ?)";
     }
-
     public static String publisherSignUp(){
         return "INSERT INTO publishers(publisherName , emailId , password) VALUES (? , ? , ?)";
     }
-
     public static String userSignIn(){
         return "SELECT password FROM users WHERE emailId = ?";
     }

@@ -1,7 +1,9 @@
 package com.dexter.service;
 
 import com.dexter.model.DBConnection;
+import com.dexter.model.User;
 import com.dexter.queries.AuthenticationQueries;
+import com.dexter.queries.DataQuery;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,5 +59,28 @@ public class UserService {
             }
         }
         return false;
+    }
+
+    public static Optional<User> getUserFromDb(String emailId) {
+        String query = DataQuery.getUserByEmailId();
+        Optional<PreparedStatement> getOptionalPreparedStatement = DBConnection.getPreparedStatement(query);
+        if(getOptionalPreparedStatement.isPresent()){
+            try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()){
+                preparedStatement.setString(1 , emailId);
+                ResultSet rs = preparedStatement.executeQuery();
+                User user = new User();
+                while(rs.next()){
+                    user.setUserId(rs.getInt(1));
+                    user.setUserName(rs.getString(2));
+                    user.setEmailId(rs.getString(3));
+                    user.setPassword(rs.getString(4));
+                    user.setPlayListId(rs.getInt(5));
+                }
+                return Optional.of(user);
+            }catch (SQLException se){
+                se.fillInStackTrace();
+            }
+        }
+        return Optional.empty();
     }
 }

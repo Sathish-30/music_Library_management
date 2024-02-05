@@ -1,6 +1,9 @@
 package com.dexter.controller;
 
+import com.dexter.model.User;
 import com.dexter.service.UserService;
+
+import java.util.Optional;
 
 public class UserController  {
     public static boolean addUser(String uName , String emailId , String password){
@@ -13,5 +16,9 @@ public class UserController  {
 
     public static boolean loginUser(String emailId, String password) {
         return UserService.CheckUserCredentials(emailId , password);
+    }
+
+    public static Optional<User> getUserByEmailId(String emailId) {
+        return UserService.getUserFromDb(emailId);
     }
 }
