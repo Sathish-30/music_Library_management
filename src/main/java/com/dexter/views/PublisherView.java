@@ -7,8 +7,9 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class PublisherView {
+    private static final Scanner in = Main.in;
+
     public static void publisherView(String emailId){
-        Scanner in = Main.in;
         Optional<Publisher> publisherOptional = PublisherController.getPublisherByEmailId(emailId);
         if(publisherOptional.isPresent()){
             System.out.print("---------------------------------------------------------------------------- \n");
@@ -30,6 +31,7 @@ public class PublisherView {
                     String sName = in.nextLine();
                     System.out.print("Enter the song genre : ");
                     String genre = in.next();
+                    in.nextLine();
                     System.out.print("Enter the song language : ");
                     String language = in.nextLine();
                     System.out.println();
@@ -46,7 +48,17 @@ public class PublisherView {
 
                 // Operation 2 for Delete song
                 if(n == 2){
-
+                    in.nextLine();
+                    System.out.print("Enter the song to be deleted from Application : ");
+                    String sName = in.nextLine();
+                    boolean status = PublisherController.deleteSong(publisher.getPublisherId() , sName);
+                    System.out.print("---------------------------------------------------------------------------- \n");
+                    if(status) {
+                        System.out.println("Song Deleted from the Application");
+                    }else{
+                        System.out.println("Unable to delete the song");
+                    }
+                    System.out.println("---------------------------------------------------------------------------- \n");
                 }
 
                 if (n == 3) break;

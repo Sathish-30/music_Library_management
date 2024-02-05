@@ -24,4 +24,8 @@ public class PublisherController {
     public static boolean addSongToDb(String sName, int publisherId, String genre, String language) {
         return PublisherService.addSongToDB(sName , publisherId , genre , language);
     }
+
+    public static boolean deleteSong(int publisherId, String sName) {
+        return PublisherService.deleteSongByPublisher(publisherId , sName);
+    }
 }

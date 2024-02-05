@@ -102,4 +102,20 @@ public class PublisherService {
         }
         return false;
     }
+
+    public static boolean deleteSongByPublisher(int publisherId, String sName) {
+        String query = PublisherPrivilegesQueries.deleteSong();
+        Optional<PreparedStatement> getOptionalPreparedStatement = DBConnection.getPreparedStatement(query);
+        if(getOptionalPreparedStatement.isPresent()){
+            try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()){
+                preparedStatement.setString(1 , sName);
+                preparedStatement.setInt(2 , publisherId);
+                preparedStatement.execute();
+                return true;
+            }catch (SQLException se){
+                se.fillInStackTrace();
+            }
+        }
+        return false;
+    }
 }

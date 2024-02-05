@@ -21,4 +21,12 @@ public class UserController  {
     public static Optional<User> getUserByEmailId(String emailId) {
         return UserService.getUserFromDb(emailId);
     }
+
+    public static void viewAllTheSongs() {
+        UserService.getAllSongsFromDB();
+    }
+
+    public static void viewAllByPublisher(String pName) {
+        UserService.getAllPublisherSongsFromDB(pName);
+    }
 }

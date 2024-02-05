@@ -1,9 +1,11 @@
 package com.dexter.service;
 
 import com.dexter.model.DBConnection;
+import com.dexter.model.Song;
 import com.dexter.model.User;
 import com.dexter.queries.AuthenticationQueries;
 import com.dexter.queries.DataQuery;
+import com.dexter.queries.UserPrivilegesQueries;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -82,5 +84,42 @@ public class UserService {
             }
         }
         return Optional.empty();
+    }
+
+    public static void getAllSongsFromDB() {
+        String query = UserPrivilegesQueries.getAllSongs();
+        Optional<PreparedStatement> getOptionalPreparedStatement = DBConnection.getPreparedStatement(query);
+        if(getOptionalPreparedStatement.isPresent()){
+            try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()){
+                ResultSet rs = preparedStatement.executeQuery();
+                System.out.print("---------------------------------------------------------------------------- \n");
+                while(rs.next()){
+                    Song song = new Song(rs.getInt(1) , rs.getString(2) , rs.getInt(3) , rs.getString(4) , rs.getString(5) , rs.getDate(6));
+                    System.out.println(song);
+                }
+                System.out.print("---------------------------------------------------------------------------- \n");
+            }catch (SQLException se){
+                se.fillInStackTrace();
+            }
+        }
+    }
+
+    public static void getAllPublisherSongsFromDB(String pName) {
+        String query = UserPrivilegesQueries.getAllSongsByPublisher();
+        Optional<PreparedStatement> getOptionalPreparedStatement = DBConnection.getPreparedStatement(query);
+        if(getOptionalPreparedStatement.isPresent()){
+            try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()){
+                preparedStatement.setString(1 , pName);
+                ResultSet rs = preparedStatement.executeQuery();
+                System.out.print("---------------------------------------------------------------------------- \n");
+                while(rs.next()){
+                    Song song = new Song(rs.getInt(1) , rs.getString(2) , rs.getInt(3) , rs.getString(4) , rs.getString(5) , rs.getDate(6));
+                    System.out.println(song);
+                }
+                System.out.print("---------------------------------------------------------------------------- \n");
+            }catch (SQLException se){
+                se.fillInStackTrace();
+            }
+        }
     }
 }
