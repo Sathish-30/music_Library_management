@@ -7,3 +7,6 @@ drop table publishers;
 
 Create table songs (songId SERIAL primary key , songName varchar(60) , publisherId integer , genre varchar(30) , language varchar(30) , releaseDate date);
 drop table songs;
+
+Create table playlists (playlistId integer not null , songId integer unique not null , songName varchar(60) not null );
+drop table playlists;

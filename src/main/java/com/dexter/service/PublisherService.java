@@ -2,7 +2,6 @@ package com.dexter.service;
 
 import com.dexter.model.DBConnection;
 import com.dexter.model.Publisher;
-import com.dexter.model.User;
 import com.dexter.queries.AuthenticationQueries;
 import com.dexter.queries.DataQuery;
 import com.dexter.queries.PublisherPrivilegesQueries;

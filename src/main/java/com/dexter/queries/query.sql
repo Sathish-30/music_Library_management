@@ -1,0 +1,1 @@
+SELECT * from playlists where playlistId = 1;
