@@ -94,15 +94,36 @@ public class UserService {
             try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()){
                 ResultSet rs = preparedStatement.executeQuery();
                 System.out.print("---------------------------------------------------------------------------- \n");
+                System.out.println();
                 while(rs.next()){
                     Song song = new Song(rs.getInt(1) , rs.getString(2) , rs.getInt(3) , rs.getString(4) , rs.getString(5) , rs.getDate(6));
                     System.out.println(song);
+                    System.out.println();
                 }
                 System.out.println("---------------------------------------------------------------------------- \n");
             }catch (SQLException se){
                 se.fillInStackTrace();
             }
         }
+    }
+
+    public static boolean checkSongIsPresent(int songId) {
+        String query = UserPrivilegesQueries.getAllSongs();
+        Optional<PreparedStatement> getOptionalPreparedStatement = DBConnection.getPreparedStatement(query);
+        if(getOptionalPreparedStatement.isPresent()){
+            try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()){
+                ResultSet rs = preparedStatement.executeQuery();
+                boolean status = true;
+                while(rs.next()){
+                    Song song = new Song(rs.getInt(1) , rs.getString(2) , rs.getInt(3) , rs.getString(4) , rs.getString(5) , rs.getDate(6));
+                    if(song.songId() != songId) status = false;
+                }
+                return status;
+            }catch (SQLException se){
+                se.fillInStackTrace();
+            }
+        }
+        return false;
     }
 
     public static void getAllPublisherSongsFromDB(String pName) {
@@ -112,11 +133,14 @@ public class UserService {
             try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()){
                 preparedStatement.setString(1 , pName);
                 ResultSet rs = preparedStatement.executeQuery();
+                boolean status = false;
                 System.out.print("---------------------------------------------------------------------------- \n");
                 while(rs.next()){
+                    status = true;
                     Song song = new Song(rs.getInt(1) , rs.getString(2) , rs.getInt(3) , rs.getString(4) , rs.getString(5) , rs.getDate(6));
                     System.out.println(song);
                 }
+                if(!status) System.out.println("No Artist Found");
                 System.out.println("---------------------------------------------------------------------------- \n");
             }catch (SQLException se){
                 se.fillInStackTrace();
@@ -165,6 +189,7 @@ public class UserService {
         Optional<String> optionalSongName = UserService.getSongNameBySongId(songId);
         if(optionalSongName.isPresent()){
             String songName = optionalSongName.get();
+            System.out.println(songName);
             if(!songName.isEmpty()){
                 String query = UserPrivilegesQueries.addSongToPlayList();
                 Optional<PreparedStatement> getOptionalPreparedStatement = DBConnection.getPreparedStatement(query);
@@ -173,7 +198,9 @@ public class UserService {
                         preparedStatement.setInt(1 , playListId);
                         preparedStatement.setInt(2 , songId);
                         preparedStatement.setString(3 , songName);
-                        preparedStatement.execute();
+                        System.out.println("Before adding song to DB");
+                        boolean res = preparedStatement.execute();
+                        System.out.println(res);
                         System.out.print("---------------------------------------------------------------------------- \n");
                         System.out.println("Song added to the playlist......");
                         System.out.print("---------------------------------------------------------------------------- \n");
@@ -231,7 +258,7 @@ public class UserService {
                 boolean status = false;
                 while(rs.next()){
                     status = true;
-                    PlayList playListSongs = new PlayList(rs.getInt(1) , rs.getInt(1) , rs.getString(3));
+                    PlayList playListSongs = new PlayList(rs.getInt(1) , rs.getInt(2) , rs.getString(3));
                     System.out.println(playListSongs);
                 }
                 if(!status) System.out.println("No Songs in the playlist");
@@ -258,5 +285,69 @@ public class UserService {
                 se.fillInStackTrace();
             }
         }
+    }
+
+    public static boolean checkUserHavePremiumAccount(int userId , int playListId) {
+        String query = UserPrivilegesQueries.checkUserHavePremiumAccount();
+        Optional<PreparedStatement> getOptionalPreparedStatement = DBConnection.getPreparedStatement(query);
+        if(getOptionalPreparedStatement.isPresent()) {
+            try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()) {
+                preparedStatement.setInt(1 , userId);
+                ResultSet rs = preparedStatement.executeQuery();
+                rs.next();
+                boolean isSubscribed = rs.getBoolean(1);
+                if(!isSubscribed){
+                    int NumberOfSongs = getNumberOfSongs(playListId);
+                    return NumberOfSongs <= 10;
+                }else{
+                    return true;
+                }
+            } catch (SQLException se) {
+                se.fillInStackTrace();
+            }
+        }
+        return false;
+    }
+
+    private static int getNumberOfSongs(int playListId) {
+        String query = UserPrivilegesQueries.getNumberOfSongsFromDbQuery();
+        Optional<PreparedStatement> getOptionalPreparedStatement = DBConnection.getPreparedStatement(query);
+        if(getOptionalPreparedStatement.isPresent()) {
+            try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()) {
+                preparedStatement.setInt(1 , playListId);
+                ResultSet rs = preparedStatement.executeQuery();
+                rs.next();
+                int countOfSongs = rs.getInt(1);
+                System.out.println(countOfSongs);
+                return countOfSongs;
+            } catch (SQLException se) {
+                se.fillInStackTrace();
+            }
+        }
+        return 0;
+    }
+
+    public static boolean checkSongInPlayList(int playListId , int songId) {
+        String query = UserPrivilegesQueries.checkSongPresentInPlayList();
+        Optional<PreparedStatement> getOptionalPreparedStatement = DBConnection.getPreparedStatement(query);
+        if(getOptionalPreparedStatement.isPresent()) {
+            try (PreparedStatement preparedStatement = getOptionalPreparedStatement.get()) {
+                preparedStatement.setInt(1 , playListId);
+                ResultSet rs = preparedStatement.executeQuery();
+                while (rs.next()){
+                    if(rs.getInt(1) == songId){
+                        return true;
+                    }
+                }
+                return false;
+            } catch (SQLException se) {
+                se.fillInStackTrace();
+            }
+        }
+        return true;
+    }
+
+    public static void getAllSongFromPlayList(int playListId) {
+
     }
 }

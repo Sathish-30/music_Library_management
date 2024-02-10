@@ -1,2 +1,17 @@
 com\dexter\App.class
+com\dexter\model\PlayList.class
+com\dexter\queries\UserPrivilegesQueries.class
+com\dexter\views\Main.class
+com\dexter\model\Publisher.class
+com\dexter\model\User.class
+com\dexter\controller\UserController.class
+com\dexter\service\UserService.class
+com\dexter\views\UserView.class
+com\dexter\queries\AuthenticationQueries.class
+com\dexter\queries\PublisherPrivilegesQueries.class
+com\dexter\service\PublisherService.class
+com\dexter\controller\PublisherController.class
+com\dexter\views\PublisherView.class
+com\dexter\model\Song.class
+com\dexter\queries\DataQuery.class
 com\dexter\model\DBConnection.class

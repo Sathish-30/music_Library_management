@@ -7,6 +7,9 @@ public class User {
     private String password;
     private int playListId;
 
+    private boolean isSubscribed;
+    private boolean subscriptionId;
+
     public User(){
 
     }
@@ -55,6 +58,22 @@ public class User {
 
     public void setPlayListId(int playListId) {
         this.playListId = playListId;
+    }
+
+    public boolean isSubscribed() {
+        return isSubscribed;
+    }
+
+    public void setSubscribed(boolean subscribed) {
+        isSubscribed = subscribed;
+    }
+
+    public boolean isSubscriptionId() {
+        return subscriptionId;
+    }
+
+    public void setSubscriptionId(boolean subscriptionId) {
+        this.subscriptionId = subscriptionId;
     }
 
     @Override

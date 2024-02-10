@@ -37,8 +37,25 @@ public class UserController  {
         UserService.getListOfGenreFromDb();
     }
 
-    public static void addSongToPlayList(int songId , int playListId) {
-        UserService.addSongsToPlayList(songId, playListId);
+    public static void addSongToPlayList(int songId , int userId ,  int playListId) {
+        if(UserService.checkSongIsPresent(songId)){
+            System.out.print("---------------------------------------------------------------------------- \n");
+            System.out.println("Song not available");
+            System.out.print("---------------------------------------------------------------------------- \n");
+        }
+        else if(UserService.checkUserHavePremiumAccount(userId , playListId)) {
+            if(!UserService.checkSongInPlayList(playListId , songId)) {
+                UserService.addSongsToPlayList(songId, playListId);
+            }else{
+                System.out.print("---------------------------------------------------------------------------- \n");
+                System.out.println("Song is Already present in the database");
+                System.out.print("---------------------------------------------------------------------------- \n");
+            }
+        }else{
+            System.out.print("---------------------------------------------------------------------------- \n");
+            System.out.println("Subscribe to the premium plan to add more songs to the playlist");
+            System.out.print("---------------------------------------------------------------------------- \n");
+        }
     }
 
     public static void deleteSongToPlayList(int songId, int playListId) {
@@ -58,5 +75,9 @@ public class UserController  {
 
     public static void getListOfPublishers() {
         UserService.getListOfPublishers();
+    }
+
+    public static void getAllSongsFromPlayList(int playListId) {
+        UserService.getAllSongFromPlayList(playListId);
     }
 }

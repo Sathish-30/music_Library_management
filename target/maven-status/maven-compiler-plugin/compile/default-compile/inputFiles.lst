@@ -1,2 +1,17 @@
+D:\musicLibraryManager\src\main\java\com\dexter\queries\DataQuery.java
+D:\musicLibraryManager\src\main\java\com\dexter\service\UserService.java
+D:\musicLibraryManager\src\main\java\com\dexter\service\PublisherService.java
+D:\musicLibraryManager\src\main\java\com\dexter\model\User.java
+D:\musicLibraryManager\src\main\java\com\dexter\views\PublisherView.java
+D:\musicLibraryManager\src\main\java\com\dexter\controller\PublisherController.java
+D:\musicLibraryManager\src\main\java\com\dexter\model\Song.java
+D:\musicLibraryManager\src\main\java\com\dexter\queries\AuthenticationQueries.java
+D:\musicLibraryManager\src\main\java\com\dexter\model\Publisher.java
+D:\musicLibraryManager\src\main\java\com\dexter\views\UserView.java
+D:\musicLibraryManager\src\main\java\com\dexter\queries\UserPrivilegesQueries.java
 D:\musicLibraryManager\src\main\java\com\dexter\model\DBConnection.java
+D:\musicLibraryManager\src\main\java\com\dexter\model\PlayList.java
 D:\musicLibraryManager\src\main\java\com\dexter\App.java
+D:\musicLibraryManager\src\main\java\com\dexter\controller\UserController.java
+D:\musicLibraryManager\src\main\java\com\dexter\views\Main.java
+D:\musicLibraryManager\src\main\java\com\dexter\queries\PublisherPrivilegesQueries.java

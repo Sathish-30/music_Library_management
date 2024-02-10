@@ -14,7 +14,7 @@ public class PublisherView {
         if(publisherOptional.isPresent()){
             System.out.print("---------------------------------------------------------------------------- \n");
             Publisher publisher = publisherOptional.get();
-            System.out.println(publisher);
+            System.out.println(publisher.getPublisherName()+" Logged In");
             System.out.println("---------------------------------------------------------------------------- \n");
             while(true) {
                 System.out.println("1. Add song");

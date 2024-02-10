@@ -47,11 +47,11 @@ public class UserView {
                     UserController.viewAllTheSongs();
                     System.out.print("Enter the song id : ");
                     int songId = in.nextInt();
-                    UserController.addSongToPlayList(songId , user.getPlayListId());
+                    UserController.addSongToPlayList(songId , user.getUserId() ,user.getPlayListId());
                 }
 
                 if(operation == 5){
-                    UserController.viewAllTheSongs();
+                    UserController.getAllSongsFromPlayList(user.getPlayListId());
                     System.out.print("Enter the song id of the song which needed to be deleted : ");
                     int songId = in.nextInt();
                     UserController.deleteSongToPlayList(songId , user.getPlayListId());

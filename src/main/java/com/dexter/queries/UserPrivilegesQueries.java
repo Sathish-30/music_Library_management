@@ -18,7 +18,7 @@ public class UserPrivilegesQueries {
     }
 
     public static String getSongBySongId(){
-        return "SELECT * FROM SONGS WHERE songId = ?";
+        return "SELECT songName FROM SONGS WHERE songId = ?";
     }
 
 
@@ -36,4 +36,20 @@ public class UserPrivilegesQueries {
     public static String getPublisherName() {
         return "SELECT publisherName FROM PUBLISHERS";
     }
+
+    public static String checkUserHavePremiumAccount() {
+        return "SELECT isSubscribed FROM USERS WHERE userId = ?";
+    }
+
+    public static String getNumberOfSongsFromDbQuery() {
+        return "SELECT COUNT(*) FROM PLAYLISTS WHERE playListId = ?";
+    }
+
+    public static String checkSongPresentInPlayList() {
+        return "SELECT songId from PLAYLISTS WHERE playListId = ?";
+    }
+
+//    public static String getAllSongsFromPlayList(){
+//        return
+//    }
 }
