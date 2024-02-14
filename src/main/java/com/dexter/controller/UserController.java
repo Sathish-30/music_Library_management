@@ -80,4 +80,8 @@ public class UserController  {
     public static void getAllSongsFromPlayList(int playListId) {
         UserService.getAllSongFromPlayList(playListId);
     }
+
+    public static void addSubscriptionToUser(int amount) {
+
+    }
 }

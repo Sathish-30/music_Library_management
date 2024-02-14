@@ -19,7 +19,8 @@ public class UserView {
                 System.out.println("4. Add song to Playlist by song id");
                 System.out.println("5. Delete song from Playlist");
                 System.out.println("6. View all the songs from the Playlist");
-                System.out.println("7. Exit");
+                System.out.println("7. Subscribe Account");
+                System.out.println("8. Exit");
                 System.out.print("Enter the operation to be performed : ");
                 int operation = in.nextInt();
 
@@ -45,7 +46,7 @@ public class UserView {
 
                 if(operation == 4){
                     UserController.viewAllTheSongs();
-                    System.out.print("Enter the song id : ");
+                    System.out.print("Enter the song id :  ");
                     int songId = in.nextInt();
                     UserController.addSongToPlayList(songId , user.getUserId() ,user.getPlayListId());
                 }
@@ -61,7 +62,13 @@ public class UserView {
                     UserController.getListOfSongsFromThePlayList(user.getPlayListId());
                 }
 
-                if (operation == 7) break;
+                if(operation == 7){
+                    System.out.println("Subscription Amount - 199 ");
+                    System.out.print("Enter the amount to add subscription : ");
+                    int amount = in.nextInt();
+                }
+
+                if (operation == 8) break;
             }
         }else{
             System.out.println("---------------------------------------------------------------------------- \n");

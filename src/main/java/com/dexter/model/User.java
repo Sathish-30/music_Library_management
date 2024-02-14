@@ -8,7 +8,7 @@ public class User {
     private int playListId;
 
     private boolean isSubscribed;
-    private boolean subscriptionId;
+    private int subscriptionId;
 
     public User(){
 
@@ -60,7 +60,7 @@ public class User {
         this.playListId = playListId;
     }
 
-    public boolean isSubscribed() {
+    public boolean getIsSubscribed() {
         return isSubscribed;
     }
 
@@ -68,11 +68,11 @@ public class User {
         isSubscribed = subscribed;
     }
 
-    public boolean isSubscriptionId() {
+    public int getSubscriptionId() {
         return subscriptionId;
     }
 
-    public void setSubscriptionId(boolean subscriptionId) {
+    public void setSubscriptionId(int subscriptionId) {
         this.subscriptionId = subscriptionId;
     }
 

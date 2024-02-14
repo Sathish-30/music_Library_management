@@ -78,6 +78,8 @@ public class UserService {
                     user.setEmailId(rs.getString(3));
                     user.setPassword(rs.getString(4));
                     user.setPlayListId(rs.getInt(5));
+                    user.setSubscribed(rs.getBoolean(6));
+                    user.setSubscriptionId(rs.getInt(7));
                 }
                 return Optional.of(user);
             }catch (SQLException se){
